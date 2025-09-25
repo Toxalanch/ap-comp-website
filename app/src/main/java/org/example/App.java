@@ -1,23 +1,29 @@
 package org.example;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/exec_code")
+@WebServlet("/mainServlet")
 public class App extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        out.println("Hello world");
+    }
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String code = request.getParameter("code");
+        String code = request.getParameter("user_written_code");
         String classApp = AppUtil.findClass(code);
         if (classApp == null) {
             response.setContentType("text/html");
-            response.getWriter().println("<html><body><h1>No decleration of class name</h1></body></html>");
+            response.getWriter().println("<html><body><h1>No declaration of class name</h1></body></html>");
         } else {
             Runner runable = new Runner(classApp, code);
             String output = runable.run();

@@ -25,7 +25,7 @@ public class Runner {
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempDir + "/" + classApp + ".java"));
             writer.write(code);
             writer.close();
-            String[] command = {"docker", "run", "-d", "-v", "\"" + tempDir + "\":/home/app/", "-e", "CLASS_NAME='" + classApp + "'", "java-runner:latest"};
+            String[] command = {"docker", "run", "-e", "CLASS_NAME=" + classApp + "", "-v", tempDir + ":/app", "java-runner:1.0.0"};
             ProcessBuilder processBuilder = new ProcessBuilder(command);
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();

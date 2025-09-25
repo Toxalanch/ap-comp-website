@@ -24,7 +24,8 @@ dependencies {
     // This dependency is used by the application.
     implementation libs.guava
 
-    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+    //implementation 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
