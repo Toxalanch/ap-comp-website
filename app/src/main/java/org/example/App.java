@@ -8,6 +8,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * The main portion of the webapp, runs code submitted through a post from the html page and outputs it to a new page
+ * 
+ * @author Toxlanch
+ * @since 1.0
+ * @version 1.0
+ */
 @WebServlet("/mainServlet")
 public class App extends HttpServlet{
     private static final long serialVersionUID = 1L;
@@ -17,6 +24,7 @@ public class App extends HttpServlet{
         PrintWriter out = response.getWriter();
         out.println("Hello world");
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String code = request.getParameter("user_written_code");

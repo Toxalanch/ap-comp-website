@@ -9,9 +9,18 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * A class made for the sole intent of creating a process that will run java code
+ */
 public class Runner {
 
+    /**
+     * Name of the class that is run by run()
+     */
     private String classApp;
+    /**
+     * The code that is run by run()
+     */
     private String code;
 
     public Runner(String classApp, String code) {
@@ -19,6 +28,13 @@ public class Runner {
         this.code = code;
     }
 
+    /**
+     * Runs code by creating a new process that runs a dockerfile that runs the javacode
+     * 
+     * TODO: check whether the method will return whenever anything is outputed regardless of if the process has completed
+     * 
+     * @return The direct output of the code
+     */
     public String run() {
         try {
             Path tempDir = Files.createTempDirectory("dockerLocation");
