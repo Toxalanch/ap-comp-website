@@ -1,5 +1,7 @@
 package org.example;
 
+//TODO: build docker file
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * A class made for the sole intent of creating a process that will run java code
+ * A class made for the sole intent of creating a process that will run java
+ * code
  */
 public class Runner {
 
@@ -29,9 +32,11 @@ public class Runner {
     }
 
     /**
-     * Runs code by creating a new process that runs a dockerfile that runs the javacode
+     * Runs code by creating a new process that runs a dockerfile that runs the
+     * javacode
      * 
-     * TODO: check whether the method will return whenever anything is outputed regardless of if the process has completed
+     * TODO: check whether the method will return whenever anything is outputed
+     * regardless of if the process has completed
      * 
      * @return The direct output of the code
      */
@@ -40,8 +45,11 @@ public class Runner {
             Path tempDir = Files.createTempDirectory("dockerLocation");
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempDir + "/" + classApp + ".java"));
             writer.write(code);
+            System.out.println("Hi");
+            System.out.println(code);
             writer.close();
-            String[] command = {"docker", "run", "-e", "CLASS_NAME=" + classApp + "", "-v", tempDir + ":/app", "java-runner:1.0.0"};
+            String[] command = { "docker", "run", "-e", "CLASS_NAME=" + classApp + "", "-v", tempDir + ":/app",
+                    "java-runner:1.0.0" };
             ProcessBuilder processBuilder = new ProcessBuilder(command);
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
@@ -51,13 +59,13 @@ public class Runner {
             String line;
             process.waitFor();
             while ((line = reader.readLine()) != null) {
-                output += line + "\n";
+                output += line + "<br>";
             }
             return output;
         } catch (IOException a) {
-            return null;
+            return a.getMessage() + "IO";
         } catch (InterruptedException e) {
-            return null;
+            return e.getMessage() + "IE";
         }
     }
 }
