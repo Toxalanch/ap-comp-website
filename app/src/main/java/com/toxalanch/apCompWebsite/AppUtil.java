@@ -30,7 +30,6 @@ public class AppUtil {
             while ((line = reader.readLine()) != null && !quit) {
                 int x = line.indexOf("public class");
                 if (x != -1) {
-                    System.out.println(line);
                     quit = true;
                     String[] words = line.split(" ");
                     if (words[2].substring(words[2].length() - 1).equals("{")) { // Checks whether or not the curly bracket is seperated from the name with a space and deletes it if true

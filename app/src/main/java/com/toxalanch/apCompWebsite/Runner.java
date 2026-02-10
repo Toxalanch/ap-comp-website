@@ -45,8 +45,6 @@ public class Runner {
             Path tempDir = Files.createTempDirectory("dockerLocation");
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempDir + "/" + classApp + ".java"));
             writer.write(code);
-            System.out.println("Hi");
-            System.out.println(code);
             writer.close();
             String[] command = { "docker", "run", "-e", "CLASS_NAME=" + classApp + "", "-v", tempDir + ":/app",
                     "java-runner:1.0.0" };
