@@ -1,1 +1,7 @@
 build a java output to html parser
+add a log file
+add testers
+add compatability to run testers
+bring output directly into website
+split website into output code and errors
+add syntax checker
