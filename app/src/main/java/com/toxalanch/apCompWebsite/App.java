@@ -1,4 +1,4 @@
-package org.example;
+package com.toxalanch.apCompWebsite;
 
 import java.io.IOException;
 import java.io.PrintWriter;

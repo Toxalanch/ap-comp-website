@@ -1,4 +1,4 @@
-package org.example;
+package com.toxalanch.apCompWebsite;
 
 //TODO: build docker file
 
