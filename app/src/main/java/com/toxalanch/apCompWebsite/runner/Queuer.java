@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class Queuer implements AutoCloseable{
-    Path path;
+    private Path path;
 
     @Override
     public final boolean equals(Object o) {
