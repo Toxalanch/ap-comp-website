@@ -18,8 +18,7 @@ All of this will be run on the system hosting the server. If run locally then do
     * Windows & Mac only:<br>
     Startup docker engine
     * Run Command in the same directory as the dockerfile:<br>
-        * Windows:
-        `docker build -t java-runner:1.0.0 ./.`
+        * Windows: First startup Docker Desktop, then run `docker build -t java-runner:1.0.0 ./.`<br> Docker Desktop must be running whenever using the server
         * Linux & Mac: `docker build -t java-runner:1.0.0 ./.`<br>
 
 2. Get the war file from the cmd
