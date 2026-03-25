@@ -1,0 +1,11 @@
+.code-poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#code {
+    width: 80vw;
+    height: 50vh;
+    box-sizing: border-box;
+    resize: vertical;
+}
