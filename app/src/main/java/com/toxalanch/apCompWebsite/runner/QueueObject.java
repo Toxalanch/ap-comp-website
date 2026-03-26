@@ -10,7 +10,7 @@ public class QueueObject implements AutoCloseable{
     private Path path;
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (o == this) {
             return true;
         }
@@ -22,7 +22,7 @@ public class QueueObject implements AutoCloseable{
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         int result = 17;
         if (path != null) {
             result = 31 * result + path.hashCode();
