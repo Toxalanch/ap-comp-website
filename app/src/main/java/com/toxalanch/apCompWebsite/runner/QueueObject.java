@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-public class Queuer implements AutoCloseable{
+public class QueueObject implements AutoCloseable{
     private Path path;
 
     @Override
@@ -14,10 +14,10 @@ public class Queuer implements AutoCloseable{
         if (o == this) {
             return true;
         }
-        if (!(o instanceof Queuer)) {
+        if (!(o instanceof QueueObject)) {
             return false;
         }
-        Queuer other = (Queuer) o;
+        QueueObject other = (QueueObject) o;
         return path.equals(other.path);
     }
 
