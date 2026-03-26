@@ -9,6 +9,10 @@ import java.util.stream.Stream;
 public class QueueObject implements AutoCloseable{
     private Path path;
 
+    public QueueObject(Path path) {
+        this.path = path;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
