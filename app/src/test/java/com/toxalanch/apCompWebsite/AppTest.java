@@ -3,4 +3,7 @@
  */
 package com.toxalanch.apCompWebsite;
 public class AppTest {
+    //TODO write test cases for finding the name of the class in a java file by parsing it testing AppUtil.findClass(String)
+    //TODO write test cases for Runner.run()
+    //This needs to check which os is being used so that it can run docker correctly and then it will test it and if AppUtil.findClass(String) works then it should work
 }

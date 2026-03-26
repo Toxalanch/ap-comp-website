@@ -37,6 +37,7 @@ public class Runner {
      * 
      * TODO: check whether the method will return whenever anything is outputed
      * regardless of if the process has completed
+     * TODO: check whether it will run on every os because of how the docker command is different
      * 
      * @return The direct output of the code
      */
