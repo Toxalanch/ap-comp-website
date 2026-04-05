@@ -6,22 +6,33 @@
     <title>java tester</title>
     <link rel="stylesheet" href="editor.css">
     <script src="script.js" defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
-    <div class="code-poster">
-        <form action="/myWebApp-1.0/mainServlet" method="post">
-            <h1>Write code</h1>
-            <textarea id="code" name="user_written_code" placeholder="Type code here">public class Main {
+    <div id="g_id_onload"
+        data-client-id="1048662434107-bmv2ui7mdsq1qelj46ghld6524p0vs5e.apps.googleusercontent.com"
+        data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+    <div class="canvas">
+        <div id="file-switcher">
+            <button onclick="addFile()">Add New File</button>
+        </div>
+        <div class="code-poster">
+            <form action="/myWebApp-1.0/mainServlet" method="post">
+                <h1>Write code</h1>
+                <textarea id="code" name="user_written_code" placeholder="Type code here">public class Main {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }
 }
             </textarea>
-            <button onclick="setCodeCookie(getCode)">Save</button>
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+                <button onclick="setCodeCookie(getCode)">Save</button>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </div>
 </body>
 
