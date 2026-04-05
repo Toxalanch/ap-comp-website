@@ -48,4 +48,23 @@ public class QueueObject implements AutoCloseable{
             System.err.println("Failed to delete: " + path.toString());
         }
     }
+
+    public String findClass() {
+        try (Stream<Path> paths = Files.walk(path)) {
+            return paths.filter(Files::isRegularFile)
+            .filter(path -> {
+                try (Stream<String> lines = Files.lines(path)) {
+                    return lines.anyMatch(line -> line.toLowerCase().indexOf("public static void main(string[] args)") != -1);
+                } catch (IOException e) {
+                    return false;
+                }
+            })
+            .findFirst()
+            .map(Path::getFileName)
+            .map(Path::toString)
+            .orElse(null);
+        } catch (IOException e) {
+            return null;
+        }
+    }
 }
