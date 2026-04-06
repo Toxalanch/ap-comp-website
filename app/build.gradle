@@ -17,9 +17,18 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
 dependencies {
     // Use JUnit test framework.
-    testImplementation libs.junit
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // This dependency is used by the application.
     implementation libs.guava
@@ -38,9 +47,4 @@ java {
 war {
     archiveBaseName.set('myWebApp')
     archiveVersion.set('1.0')
-}
-
-application {
-    // Define the main class for the application.
-    mainClass = 'org.example.App'
 }
