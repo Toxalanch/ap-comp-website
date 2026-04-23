@@ -1,6 +1,8 @@
 name: commit-actions
 run-name: ${{ github.actor }} is pushing
 on: [push]
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 jobs:
   gradle-test:
     runs-on: ubuntu-latest
