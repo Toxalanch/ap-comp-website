@@ -48,3 +48,26 @@ war {
     archiveBaseName.set('myWebApp')
     archiveVersion.set('1.0')
 }
+
+testing {
+    suites {
+        integrationTest(JvmTestSuite) {
+            testType = TestSuiteType.INTEGRATION_TEST
+
+            configurations.integrationTestImplementation.extendsFrom(configurations.testImplementation)
+            configurations.integrationTestRuntimeOnly.extendsFrom(configurations.testRuntimeOnly)
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
+}
