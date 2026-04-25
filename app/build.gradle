@@ -10,19 +10,12 @@ plugins {
     id 'java'
     id 'war'
     id 'application'
+    id 'jvm-test-suite'
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
-}
-
-test {
-    useJUnitPlatform()
-
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
 }
 
 dependencies {
@@ -51,11 +44,20 @@ war {
 
 testing {
     suites {
-        integrationTest(JvmTestSuite) {
-            testType = TestSuiteType.INTEGRATION_TEST
+        test {
+            useJUnitJupiter()
+        }
 
-            configurations.integrationTestImplementation.extendsFrom(configurations.testImplementation)
-            configurations.integrationTestRuntimeOnly.extendsFrom(configurations.testRuntimeOnly)
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+
+            sources {
+                java {
+                    srcDirs = ['src/integrationTest/java']
+                }
+            }
 
             targets {
                 all {
@@ -65,9 +67,51 @@ testing {
                 }
             }
         }
+
+        performanceTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+
+            sources {
+                java {
+                    srcDirs = ['src/performanceTest/java']
+                }
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(integrationTest)
+                    }
+                }
+            }
+        }
+
+        functionalTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+
+            sources {
+                java {
+                    srcDirs = ['src/functionalTest/java']
+                }
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(integrationTest)
+                    }
+                }
+            }
+        }
     }
 }
 
 tasks.named('check') {
     dependsOn(testing.suites.integrationTest)
+    dependsOn(testing.suites.functionalTest)
+    dependsOn(testing.suites.performanceTest)
 }
