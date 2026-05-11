@@ -17,6 +17,8 @@ import java.nio.file.Path;
  */
 public class Runner {
 
+    private static boolean dockerBuilt;
+
     /**
      * Name of the class that is run by run()
      */
@@ -42,6 +44,15 @@ public class Runner {
      * @return The direct output of the code
      */
     public String run() {
+
+        if (!dockerBuilt) {
+            try {
+                Runner.buildDocker();
+                dockerBuilt = true;
+            } catch (IOException | InterruptedException e) {
+                return null;
+            }
+        }
         try {
             Path tempDir = Files.createTempDirectory("dockerLocation");
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempDir + "/" + classApp + ".java"));
@@ -66,5 +77,17 @@ public class Runner {
         } catch (InterruptedException e) {
             return e.getMessage() + "IE";
         }
+    }
+
+    /**
+     * Builds the docker file used by the process and saves it as being built for all uses on this server during this runtime session
+     * 
+     * @throws IOException  if the docker file is not in the specified location or docker is not installed
+     * @throws InterruptedException interrupted by another thread
+     */
+    public static void buildDocker() throws IOException, InterruptedException {
+        String[] command = {"docker", "build", "-t", "java-runner:1.0.0 ./."};
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.start().waitFor();
     }
 }
